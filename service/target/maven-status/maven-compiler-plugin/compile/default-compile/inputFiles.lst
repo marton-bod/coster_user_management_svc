@@ -1,0 +1,10 @@
+/home/marton/marton/Repositories/Coster.io/user-management/service/src/main/java/io/coster/usermanagementsvc/config/UserManagementConfig.java
+/home/marton/marton/Repositories/Coster.io/user-management/service/src/main/java/io/coster/usermanagementsvc/repositories/TokenRepository.java
+/home/marton/marton/Repositories/Coster.io/user-management/service/src/main/java/io/coster/usermanagementsvc/domain/User.java
+/home/marton/marton/Repositories/Coster.io/user-management/service/src/main/java/io/coster/usermanagementsvc/controllers/AuthController.java
+/home/marton/marton/Repositories/Coster.io/user-management/service/src/main/java/io/coster/usermanagementsvc/repositories/UserRepository.java
+/home/marton/marton/Repositories/Coster.io/user-management/service/src/main/java/io/coster/usermanagementsvc/services/exceptions/UserAlreadyExists.java
+/home/marton/marton/Repositories/Coster.io/user-management/service/src/main/java/io/coster/usermanagementsvc/domain/AuthToken.java
+/home/marton/marton/Repositories/Coster.io/user-management/service/src/main/java/io/coster/usermanagementsvc/services/exceptions/InvalidCredentials.java
+/home/marton/marton/Repositories/Coster.io/user-management/service/src/main/java/io/coster/usermanagementsvc/services/AuthService.java
+/home/marton/marton/Repositories/Coster.io/user-management/service/src/main/java/io/coster/usermanagementsvc/UserManagementSvcApplication.java

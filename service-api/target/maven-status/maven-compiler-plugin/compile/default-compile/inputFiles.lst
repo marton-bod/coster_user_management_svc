@@ -1,0 +1,5 @@
+/home/marton/marton/Repositories/Coster.io/user-management/service-api/src/main/java/io/coster/usermanagementsvc/contract/RegistrationRequest.java
+/home/marton/marton/Repositories/Coster.io/user-management/service-api/src/main/java/io/coster/usermanagementsvc/contract/ValidationRequest.java
+/home/marton/marton/Repositories/Coster.io/user-management/service-api/src/main/java/io/coster/usermanagementsvc/contract/LoginRequest.java
+/home/marton/marton/Repositories/Coster.io/user-management/service-api/src/main/java/io/coster/usermanagementsvc/contract/ErrorResponse.java
+/home/marton/marton/Repositories/Coster.io/user-management/service-api/src/main/java/io/coster/usermanagementsvc/contract/AuthenticationResponse.java
