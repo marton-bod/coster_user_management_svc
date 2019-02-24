@@ -85,8 +85,7 @@
                 </executions>
                 <configuration>
                     <imageName>coster.io/user-mgmt-svc</imageName>
-                    <baseImage>adoptopenjdk/openjdk11:alpine-slim</baseImage>
-                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <dockerDirectory>docker</dockerDirectory>
                     <!-- copy the service's jar file from target into the root directory of the image -->
                     <resources>
                         <resource>

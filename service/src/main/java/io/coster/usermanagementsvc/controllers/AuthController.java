@@ -45,8 +45,6 @@ public class AuthController {
     @PostMapping("/register")
     public AuthenticationResponse register(@RequestBody @Valid RegistrationRequest request, HttpServletResponse response) {
         String authToken = authService.register(request);
-        response.addCookie(createCookie("auth_token", authToken));
-        response.addCookie(createCookie("auth_id", request.getEmailAddr()));
         return AuthenticationResponse.builder()
                 .valid(true)
                 .userId(request.getEmailAddr())
@@ -56,8 +54,6 @@ public class AuthController {
     @PostMapping("/login")
     public AuthenticationResponse login(@RequestBody @Valid LoginRequest request, HttpServletResponse response) {
         String authToken = authService.login(request);
-        response.addCookie(createCookie("auth_token", authToken));
-        response.addCookie(createCookie("auth_id", request.getEmailAddr()));
         return AuthenticationResponse.builder()
                 .valid(true)
                 .userId(request.getEmailAddr())
