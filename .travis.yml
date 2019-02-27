@@ -1,0 +1,28 @@
+language: java
+jdk:
+  - openjdk11
+
+branches:
+  only:
+    - master
+
+before_install:
+  - chmod +x mvnw
+
+script:
+  - mvn clean verify
+
+after_script:
+  - echo "Done building the script. Hooray!"
+
+notifications:
+  email:
+    recipients:
+      - marton.bod@gmail.com
+
+    # change is when the repo status goes from pass to fail or vice versa
+    on_success: change
+    on_failure: always
+
+  # Or disable email
+  # email: false

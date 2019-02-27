@@ -1,10 +1,10 @@
-## User management service
+## Coster.io - User management service
 
 Microservice responsible for managing user data, including registration, login and authentication.
 Developed in spring-boot.
 
 ### Build the app:
-* Prerequisites: Maven, JDK11 (JDK8 not tested)
+* Prerequisites: Maven, JDK11 (note: JDK8 not yet tested)
 * `mvn clean install` - if you have docker engine
 * `mvn clean install -DskipDocker` - if not
 
