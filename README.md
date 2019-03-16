@@ -9,6 +9,7 @@ Developed in spring-boot.
 * `mvn clean install -DskipDocker` - if not
 
 ### Run the app:
+- `cd services`
 - Run: `mvn spring-boot:run -Dspring.profiles.active=dev`
     - the dev profile uses an in-memory database. If you have postgreSQL db running locally on the default port you might decide to leave out this profile flag
     - default port: 9001
