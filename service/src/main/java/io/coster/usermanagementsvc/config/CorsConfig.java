@@ -15,6 +15,7 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/auth/**")
                         .allowedOrigins("http://localhost:3000")
+                        .allowedOrigins("https://costerio.herokuapp.com")
                         .allowCredentials(true);
             }
         };

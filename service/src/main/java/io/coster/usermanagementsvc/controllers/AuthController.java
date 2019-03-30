@@ -29,8 +29,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private static final int ONE_DAY = 60 * 60 * 24;
-
     private final AuthService authService;
 
     @PostMapping("/validate")
@@ -58,13 +56,6 @@ public class AuthController {
                 .valid(true)
                 .userId(request.getEmailAddr())
                 .authToken(authToken).build();
-    }
-
-    private Cookie createCookie(String cookieName, String cookieValue) {
-        Cookie cookie = new Cookie(cookieName, cookieValue);
-        cookie.setPath("/");
-        cookie.setMaxAge(ONE_DAY);
-        return cookie;
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
