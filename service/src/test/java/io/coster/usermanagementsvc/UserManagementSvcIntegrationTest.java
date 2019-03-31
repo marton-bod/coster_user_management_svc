@@ -1,10 +1,12 @@
 package io.coster.usermanagementsvc;
 
+import com.github.tomakehurst.wiremock.WireMockServer;
 import io.coster.usermanagementsvc.contract.AuthenticationResponse;
 import io.coster.usermanagementsvc.contract.ErrorResponse;
 import io.coster.usermanagementsvc.contract.LoginRequest;
 import io.coster.usermanagementsvc.contract.RegistrationRequest;
 import io.coster.usermanagementsvc.contract.ValidationRequest;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -23,11 +30,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
 public class UserManagementSvcIntegrationTest {
 
+    private static WireMockServer wireMockServer;
+
     @LocalServerPort
     int port;
 
 	@Autowired
     private TestRestTemplate restTemplate;
+
+    @BeforeClass
+    public static void startWireMock()  {
+        configureFor("localhost", 10001);
+        wireMockServer = new WireMockServer(10001);
+        wireMockServer.start();
+        stubFor(post(urlEqualTo("/notification/postregister")).willReturn(aResponse()
+                .withStatus(200)));
+    }
 
     @Test
 	public void registerWithValidData_Receive200() {
