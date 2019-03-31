@@ -26,6 +26,7 @@ public class AuthService {
     private final TokenRepository tokenRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final NotificationService notificationService;
 
     public boolean validate(String userId, String token) {
         Optional<AuthToken> optToken = tokenRepository.findByUserIdAndAuthToken(userId, token);
@@ -64,6 +65,8 @@ public class AuthService {
                 .expiry(now.plus(TOKEN_TTL_HOURS, ChronoUnit.HOURS))
                 .build();
         tokenRepository.saveAndFlush(tokenEntry);
+
+        notificationService.sendPostRegistrationMessage(user);
 
         return token;
     }
