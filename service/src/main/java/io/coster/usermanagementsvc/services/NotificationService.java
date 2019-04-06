@@ -18,7 +18,7 @@ import java.util.UUID;
 @Service
 public class NotificationService {
 
-    @Value("frontend.root.url")
+    @Value("${frontend.root.url}")
     private String frontendRootUrl;
 
     @Autowired
