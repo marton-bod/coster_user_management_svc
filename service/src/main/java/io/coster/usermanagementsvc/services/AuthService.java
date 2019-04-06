@@ -114,13 +114,17 @@ public class AuthService {
     }
 
     public String resetPassword(@Valid PasswordResetRequest request) {
-        // check if credentials are valid
+        // check if user exists
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new InvalidCredentials("Email address is not registered."));
 
-        // delete any previous tokens
-        Optional<AuthToken> previousToken = tokenRepository.findById(user.getEmailAddr());
-        previousToken.ifPresent(tokenRepository::delete);
+        // compare against existing token
+        AuthToken previousToken = tokenRepository.findById(user.getEmailAddr())
+                .orElseThrow(() -> new InvalidCredentials("Token does not exist for user."));
+        if (!previousToken.getAuthToken().equals(request.getToken())) {
+            throw new InvalidCredentials("Token is invalid.");
+        }
+        tokenRepository.delete(previousToken);
 
         // generate new token
         LocalDateTime now = LocalDateTime.now();
