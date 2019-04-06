@@ -1,6 +1,7 @@
 package io.coster.usermanagementsvc.services;
 
 import io.coster.usermanagementsvc.contract.LoginRequest;
+import io.coster.usermanagementsvc.contract.PasswordResetRequest;
 import io.coster.usermanagementsvc.contract.RegistrationRequest;
 import io.coster.usermanagementsvc.domain.AuthToken;
 import io.coster.usermanagementsvc.domain.User;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
@@ -103,7 +105,36 @@ public class AuthService {
         return token.getAuthToken();
     }
 
+    public Optional<User> doesUserExist(String emailAddr) {
+        return userRepository.findById(emailAddr);
+    }
+
     private boolean passwordMatch(LoginRequest request, User user) {
         return passwordEncoder.matches(request.getPassword(), user.getPassword());
+    }
+
+    public String resetPassword(@Valid PasswordResetRequest request) {
+        // check if credentials are valid
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new InvalidCredentials("Email address is not registered."));
+
+        // delete any previous tokens
+        Optional<AuthToken> previousToken = tokenRepository.findById(user.getEmailAddr());
+        previousToken.ifPresent(tokenRepository::delete);
+
+        // generate new token
+        LocalDateTime now = LocalDateTime.now();
+        AuthToken token = AuthToken.builder()
+                .authToken(UUID.randomUUID().toString())
+                .userId(user.getEmailAddr())
+                .issued(now)
+                .expiry(now.plus(TOKEN_TTL_HOURS, ChronoUnit.HOURS)).build();
+        tokenRepository.saveAndFlush(token);
+
+        // change password
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        userRepository.saveAndFlush(user);
+
+        return token.getAuthToken();
     }
 }
