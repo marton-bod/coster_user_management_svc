@@ -111,7 +111,7 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <imageName>martonbod/coster.io-user-mgmt-svc:1.0</imageName>
+                            <imageName>martonbod/coster.io-user-mgmt-svc:latest</imageName>
                             <dockerDirectory>docker</dockerDirectory>
                             <!-- copy the service's jar file from target into the root directory of the image -->
                             <resources>
